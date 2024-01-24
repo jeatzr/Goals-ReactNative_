@@ -13,7 +13,13 @@ export default function App() {
   }
 
   function addGoalHandler() {
-    setMyGoals(myCurrentGoals => [...myCurrentGoals, newGoal])
+    setMyGoals(myCurrentGoals => [...myCurrentGoals,
+    {
+      id: Date.now(),
+      text: newGoal,
+    }]);
+    setNewGoal("");
+
   }
 
   return (
@@ -22,6 +28,7 @@ export default function App() {
         <TextInput
           onChangeText={textChangeHandler}
           style={styles.textInput}
+          value={newGoal}
           placeholder='Input your Goal!!'
         />
         <Button
@@ -34,8 +41,8 @@ export default function App() {
         <FlatList
           data={myGoals}
           renderItem={(dataItem) => (
-            <View style={styles.goalItem} key={dataItem.item}>
-              <Text style={styles.goalText}>{dataItem.item}</Text>
+            <View style={styles.goalItem} key={dataItem.item.id}>
+              <Text style={styles.goalText}>{dataItem.item.text}</Text>
             </View>
           )
           }
