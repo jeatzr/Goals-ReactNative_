@@ -11,11 +11,12 @@ export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
 
   function addGoalHandler(newGoalText) {
-    setMyGoals(myCurrentGoals => [...myCurrentGoals,
-    {
+    setMyGoals(myCurrentGoals => [{
       id: Date.now(),
       text: newGoalText,
-    }]);
+    }, ...myCurrentGoals
+    ]);
+    setModalVisible(false);
   }
   function onDeleteGoalHandler(id) {
     setMyGoals((myCurrentGoals) => {
